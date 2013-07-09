@@ -10,7 +10,7 @@ import com.github.sarxos.webcam.Webcam;
 
 public class Plugin extends StubPlugin {
 
-	public static final byte HEADER = (byte) 155;
+	public static final byte HEADER = 120;
 
 	public static DataInputStream dis;
 	public static DataOutputStream dos;
