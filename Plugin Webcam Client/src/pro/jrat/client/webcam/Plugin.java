@@ -1,4 +1,4 @@
-package org.jrat.project.client.plugin;
+package pro.jrat.client.webcam;
 
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
@@ -23,7 +23,7 @@ import pro.jrat.api.events.OnEnableEvent;
 import pro.jrat.api.events.OnPacketEvent;
 import pro.jrat.api.events.OnSendPacketEvent;
 
-public class WebcamPlugin extends RATPlugin {
+public class Plugin extends RATPlugin {
 
 	public static final String ICON_LOCATION = System.getProperty("jrat.dir") + File.separator + "plugins/Webcam/icon.png";
 	public static final byte HEADER = 120;
@@ -51,7 +51,7 @@ public class WebcamPlugin extends RATPlugin {
 		if (event.getPacket().getHeader() == HEADER) {
 			String name = readString(event.getServer().getDataReader());
 
-			PanelWebcam panel = (PanelWebcam) WebcamPlugin.entry.instances.get(event.getServer().getIP());
+			PanelWebcam panel = (PanelWebcam) Plugin.entry.instances.get(event.getServer().getIP());
 
 			System.out.println(name);
 			

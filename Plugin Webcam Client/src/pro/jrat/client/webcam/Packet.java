@@ -1,4 +1,4 @@
-package org.jrat.project.client.plugin;
+package pro.jrat.client.webcam;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -9,12 +9,12 @@ import pro.jrat.api.RATObject;
 public class Packet extends PacketBuilder {
 
 	public Packet(RATObject rat) {
-		super(WebcamPlugin.HEADER, rat);
+		super(Plugin.HEADER, rat);
 	}
 
 	@Override
 	public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
-		dos.writeBoolean(WebcamPlugin.enabled);
+		dos.writeBoolean(Plugin.enabled);
 	}
 
 }
