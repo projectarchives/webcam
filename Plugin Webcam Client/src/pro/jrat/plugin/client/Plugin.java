@@ -1,4 +1,4 @@
-package pro.jrat.client.webcam;
+package pro.jrat.plugin.client;
 
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
@@ -15,7 +15,6 @@ import pro.jrat.api.RATControlMenuEntry;
 import pro.jrat.api.RATMenuItem;
 import pro.jrat.api.RATPlugin;
 import pro.jrat.api.Reader;
-import pro.jrat.api.compress.GZip;
 import pro.jrat.api.events.OnConnectEvent;
 import pro.jrat.api.events.OnDisableEvent;
 import pro.jrat.api.events.OnDisconnectEvent;
