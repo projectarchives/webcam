@@ -19,7 +19,7 @@ public class MenuListener implements RATMenuItemActionListener {
 			if (servers.size() > 0) {
 				final RATObject server = servers.get(0);
 				BaseControlPanel panel = null;
-
+						 
 				if (WebcamPlugin.entry.instances.containsKey(server.getIP())) {
 					panel = WebcamPlugin.entry.instances.get(server.getIP());
 				} else {
@@ -27,11 +27,14 @@ public class MenuListener implements RATMenuItemActionListener {
 					WebcamPlugin.entry.instances.put(server.getIP(), panel);
 				}
 
+				final BaseControlPanel finalPanel = panel;
+				
 				JFrame frame = new JFrame();
 				frame.addWindowListener(new WindowAdapter() {
 					@Override
 					public void windowClosing(WindowEvent arg0) {
 						WebcamPlugin.entry.instances.remove(server.getIP());
+						finalPanel.onClose();
 					}
 				});
 				frame.setTitle("Webcam - " + server.getIP());
