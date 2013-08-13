@@ -96,4 +96,9 @@ public class WebcamPlugin extends StubPlugin {
 			return "Unknown";
 		}
 	}
+
+	@Override
+	public void onStart() {
+		
+	}
 }
