@@ -126,7 +126,7 @@ public class PanelWebcam extends BaseControlPanel {
 		lblName = new JLabel("Unknown");
 		
 		spInterval = new JSpinner();
-		spInterval.setModel(new SpinnerNumberModel(0, 10, 10000, 10));
+		spInterval.setModel(new SpinnerNumberModel(100, 0, 10000, 10));
 		
 		JLabel lblMs = new JLabel("ms");
 		
