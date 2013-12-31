@@ -1,4 +1,4 @@
-package pro.jrat.plugin.client;
+package pro.jrat.plugin.webcam.client;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
