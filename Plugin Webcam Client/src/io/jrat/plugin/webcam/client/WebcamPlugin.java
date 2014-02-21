@@ -1,4 +1,4 @@
-package pro.jrat.plugin.webcam.client;
+package io.jrat.plugin.webcam.client;
 
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
@@ -11,16 +11,15 @@ import java.util.Properties;
 
 import javax.swing.ImageIcon;
 
-import pro.jrat.api.RATControlMenuEntry;
-import pro.jrat.api.RATMenuItem;
-import pro.jrat.api.RATPlugin;
-import pro.jrat.api.Reader;
-import pro.jrat.api.events.OnConnectEvent;
-import pro.jrat.api.events.OnDisableEvent;
-import pro.jrat.api.events.OnDisconnectEvent;
-import pro.jrat.api.events.OnEnableEvent;
-import pro.jrat.api.events.OnPacketEvent;
-import pro.jrat.api.events.OnSendPacketEvent;
+import jrat.api.RATControlMenuEntry;
+import jrat.api.RATMenuItem;
+import jrat.api.RATPlugin;
+import jrat.api.events.OnConnectEvent;
+import jrat.api.events.OnDisableEvent;
+import jrat.api.events.OnDisconnectEvent;
+import jrat.api.events.OnEnableEvent;
+import jrat.api.events.OnPacketEvent;
+import jrat.api.events.OnSendPacketEvent;
 
 public class WebcamPlugin extends RATPlugin {
 
