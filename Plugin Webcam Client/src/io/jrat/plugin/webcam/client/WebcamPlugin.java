@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import jrat.api.RATControlMenuEntry;
 import jrat.api.RATMenuItem;
 import jrat.api.RATPlugin;
+import jrat.api.Reader;
 import jrat.api.events.OnConnectEvent;
 import jrat.api.events.OnDisableEvent;
 import jrat.api.events.OnDisconnectEvent;
