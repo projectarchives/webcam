@@ -1,1 +1,1 @@
-io.jrat.plugin.stub.WebcamPlugin
+io.jrat.plugin.webcam.stub.WebcamPlugin
