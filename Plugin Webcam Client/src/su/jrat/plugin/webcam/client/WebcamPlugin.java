@@ -1,4 +1,4 @@
-package io.jrat.plugin.webcam.client;
+package su.jrat.plugin.webcam.client;
 
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
