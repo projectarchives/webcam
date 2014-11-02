@@ -24,7 +24,7 @@ import jrat.api.events.OnSendPacketEvent;
 
 public class WebcamPlugin extends RATPlugin {
 
-	public static final String ICON_LOCATION = System.getProperty("jrat.dir") + File.separator + "plugins/Webcam/icon.png";
+	public static final String ICON_LOCATION = System.getProperty("jrat.dir") + File.separator + "/files/plugins/Webcam/icon.png";
 	public static final byte HEADER = 120;
 
 	public static RATControlMenuEntry entry;
