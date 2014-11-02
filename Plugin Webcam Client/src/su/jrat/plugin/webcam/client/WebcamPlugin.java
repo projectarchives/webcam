@@ -92,7 +92,7 @@ public class WebcamPlugin extends RATPlugin {
 	}
 
 	public String getVersion() {
-		return "4.1.4";
+		return "1.0";
 	}
 
 	public String getDescription() {
