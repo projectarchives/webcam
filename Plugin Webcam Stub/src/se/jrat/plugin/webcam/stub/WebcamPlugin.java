@@ -110,12 +110,7 @@ public class WebcamPlugin extends StubPlugin {
 
 	@Override
 	public String getName() {
-		try {
-			return "Webcam";
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			return "Unknown";
-		}
+		return "Webcam";
 	}
 
 	@Override
