@@ -2,8 +2,6 @@ package se.jrat.plugin.webcam.client;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import jrat.api.PacketBuilder;
 import jrat.api.RATObject;

