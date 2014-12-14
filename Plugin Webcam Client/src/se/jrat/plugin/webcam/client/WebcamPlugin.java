@@ -100,7 +100,7 @@ public class WebcamPlugin extends RATPlugin {
 	}
 
 	public String getAuthor() {
-		return "redpois0n";
+		return "jRAT";
 	}
 
 	// Server connected to us
