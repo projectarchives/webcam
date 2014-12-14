@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -37,6 +38,8 @@ public class WebcamPlugin extends RATPlugin {
 
 			PanelWebcam.WIDTH = Integer.parseInt(prop.getProperty("width"));
 			PanelWebcam.HEIGHT = Integer.parseInt(prop.getProperty("height"));
+		} catch (FileNotFoundException ex) {
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
