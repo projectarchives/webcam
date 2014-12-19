@@ -137,8 +137,12 @@ public class PanelWebcam extends BaseControlPanel {
 		
 		List<String> cams = WebcamPlugin.map.get(getServer());
 		
-		for (String s : cams) {
-			model.addElement(s);
+		if (cams != null) {
+			for (String s : cams) {
+				model.addElement(s);
+			}
+		} else {
+			model.addElement("No webcams found");
 		}
 
 		lblName = new JLabel("...");
@@ -172,7 +176,7 @@ public class PanelWebcam extends BaseControlPanel {
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
@@ -190,7 +194,7 @@ public class PanelWebcam extends BaseControlPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblName))
-					.addGap(14))
+					.addGap(10))
 		);
 		setLayout(groupLayout);
 
