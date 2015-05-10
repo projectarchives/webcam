@@ -16,13 +16,13 @@ import javax.swing.ImageIcon;
 
 import jrat.api.Client;
 import jrat.api.RATPlugin;
-import jrat.api.Reader;
 import jrat.api.events.OnConnectEvent;
 import jrat.api.events.OnDisableEvent;
 import jrat.api.events.OnDisconnectEvent;
 import jrat.api.events.OnEnableEvent;
 import jrat.api.events.OnPacketEvent;
 import jrat.api.events.OnSendPacketEvent;
+import jrat.api.net.Reader;
 import jrat.api.ui.RATControlMenuEntry;
 import jrat.api.ui.RATMenuItem;
 
