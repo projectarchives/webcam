@@ -14,9 +14,7 @@ import java.util.Properties;
 
 import javax.swing.ImageIcon;
 
-import jrat.api.RATControlMenuEntry;
-import jrat.api.RATMenuItem;
-import jrat.api.RATObject;
+import jrat.api.Client;
 import jrat.api.RATPlugin;
 import jrat.api.Reader;
 import jrat.api.events.OnConnectEvent;
@@ -25,6 +23,8 @@ import jrat.api.events.OnDisconnectEvent;
 import jrat.api.events.OnEnableEvent;
 import jrat.api.events.OnPacketEvent;
 import jrat.api.events.OnSendPacketEvent;
+import jrat.api.ui.RATControlMenuEntry;
+import jrat.api.ui.RATMenuItem;
 
 public class WebcamPlugin extends RATPlugin {
 
@@ -35,7 +35,7 @@ public class WebcamPlugin extends RATPlugin {
 	public static RATControlMenuEntry entry;
 	public static boolean enabled;
 	
-	public static Map<RATObject, List<String>> map = new HashMap<RATObject, List<String>>();
+	public static Map<Client, List<String>> map = new HashMap<Client, List<String>>();
 
 	public WebcamPlugin() {
 		super("Webcam", "1.1.1", "Webcam Plugin", "jRAT");
@@ -147,7 +147,7 @@ public class WebcamPlugin extends RATPlugin {
 	}
 
 	@Override
-	public ActionListener getGlobalMenuItemListener() {
+	public ActionListener getGlobalActionListener() {
 		return null;
 	}
 

