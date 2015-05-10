@@ -37,6 +37,10 @@ public class WebcamPlugin extends RATPlugin {
 	
 	public static Map<RATObject, List<String>> map = new HashMap<RATObject, List<String>>();
 
+	public WebcamPlugin() {
+		super("Webcam", "1.1.1", "Webcam Plugin", "jRAT");
+	}
+
 	public void onEnable(OnEnableEvent event) throws Exception {
 		try {
 			Properties prop = new Properties();
@@ -103,22 +107,6 @@ public class WebcamPlugin extends RATPlugin {
 		}
 		
 		return buffer.toString();
-	}
-
-	public String getName() {
-		return "Webcam";
-	}
-
-	public String getVersion() {
-		return "1.1.1";
-	}
-
-	public String getDescription() {
-		return "Webcam Plugin";
-	}
-
-	public String getAuthor() {
-		return "jRAT";
 	}
 
 	public void onConnect(final OnConnectEvent event) throws Exception {
