@@ -13,7 +13,7 @@ public class Packet120Webcam extends PacketListener {
 		try {
 			String name = WebcamPlugin.readString(client.getDataReader());
 
-			PanelWebcam panel = (PanelWebcam) WebcamPlugin.entry.getInstances().get(client);
+			PanelWebcam panel = (PanelWebcam) WebcamPlugin.entry.get(client);
 			
 			if (name.equals("DISABLED")) {
 				WebcamPlugin.enabled = false;

