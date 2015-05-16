@@ -9,6 +9,13 @@ Cross platform Webcam Capture Plugin based on [sarxos webcam capture](https://gi
 | Description   | Webcam Plugin
 | Version		| 1.0
 
+## Packets
+
+| Packet Name	| Header
+| ---           |:---
+| LIST_WEBCAMS	| 121
+| WEBCAM_FRAME	| 120
+
 ## Dependencies
 
 - Client
