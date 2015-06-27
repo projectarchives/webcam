@@ -1,4 +1,4 @@
-package se.jrat.plugin.webcam.client;
+package jrat.plugin.webcam.client;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;

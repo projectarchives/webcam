@@ -1,4 +1,4 @@
-package se.jrat.plugin.webcam.client;
+package jrat.plugin.webcam.client;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

@@ -1,4 +1,4 @@
-package se.jrat.plugin.webcam.client;
+package jrat.plugin.webcam.client;
 
 import jrat.api.Client;
 import jrat.api.events.AbstractEvent;
