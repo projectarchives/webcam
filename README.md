@@ -7,7 +7,7 @@ Cross platform Webcam Capture Plugin based on [sarxos webcam capture](https://gi
 | Name			| Webcam
 | Author     	| jRAT
 | Description   | Webcam Plugin
-| Version		| 1.2
+| Version		| 1.3
 
 ## Packets
 
