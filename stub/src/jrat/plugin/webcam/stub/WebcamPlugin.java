@@ -150,9 +150,4 @@ public class WebcamPlugin extends StubPlugin {
 	public String getName() {
 		return "Webcam";
 	}
-
-	@Override
-	public void onStart() {
-
-	}
 }
